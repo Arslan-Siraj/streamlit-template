@@ -97,18 +97,18 @@ jobs:
           done
 
     - name: Install XercesC
-      shell: bash
+      shell: powershell
       run: |
-          # Download the XercesC installer or libraries using curl
-          curl -o xercesc-installer.exe "https://example.com/path/to/xercesc-installer.exe"
-          
+          # Download the XercesC installer or libraries using PowerShell
+          Invoke-WebRequest -Uri "https://example.com/path/to/xercesc-installer.exe" -OutFile xercesc-installer.exe
+      
           # Install XercesC (modify the command to match the actual installer you have)
           Start-Process -Wait -FilePath "xercesc-installer.exe" -ArgumentList "/S" # /S for silent installation
-          
+      
           # Add XercesC installation path to the system's PATH and include environment variables
-          xercescPath="/path/to/XercesC"
-          export XercesC_INCLUDE_DIR="$xercescPath/include"
-          export XercesC_LIBRARY="$xercescPath/lib"
+          $xercescPath="C:\path\to\XercesC" # Update with the actual installation path
+          [System.Environment]::SetEnvironmentVariable("XercesC_INCLUDE_DIR", "$xercescPath\include", [System.EnvironmentVariableTarget]::Machine)
+          [System.Environment]::SetEnvironmentVariable("XercesC_LIBRARY", "$xercescPath\lib", [System.EnvironmentVariableTarget]::Machine)
       env:
           XercesC_INCLUDE_DIR: ${{ env.XercesC_INCLUDE_DIR }}
           XercesC_LIBRARY: ${{ env.XercesC_LIBRARY }}
