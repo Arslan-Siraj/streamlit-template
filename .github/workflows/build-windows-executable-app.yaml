@@ -96,6 +96,25 @@ jobs:
             echo $thirdpartytool >> $GITHUB_PATH
           done
 
+    - name: Install XercesC
+      shell: bash
+      run: |
+          # Download the XercesC installer or libraries
+          # For example, you could use a URL to download the installer or libraries
+          wget -O xercesc-installer.exe "https://example.com/path/to/xercesc-installer.exe"
+          
+          # Install XercesC (modify the command to match the actual installer you have)
+          wine xercesc-installer.exe # If you're using Wine for Windows emulation
+          
+          # Add XercesC installation path to the system's PATH and include environment variables
+          xercescPath="/path/to/XercesC"
+          export XercesC_INCLUDE_DIR="$xercescPath/include"
+          export XercesC_LIBRARY="$xercescPath/lib"
+      env:
+          XercesC_INCLUDE_DIR: ${{ env.XercesC_INCLUDE_DIR }}
+          XercesC_LIBRARY: ${{ env.XercesC_LIBRARY }}
+
+    
     - name: Build Windows
       shell: bash
       run: |
