@@ -99,12 +99,11 @@ jobs:
     - name: Install XercesC
       shell: bash
       run: |
-          # Download the XercesC installer or libraries
-          # For example, you could use a URL to download the installer or libraries
-          wget -O xercesc-installer.exe "https://example.com/path/to/xercesc-installer.exe"
+          # Download the XercesC installer or libraries using Invoke-WebRequest
+          Invoke-WebRequest -Uri "https://example.com/path/to/xercesc-installer.exe" -OutFile "xercesc-installer.exe"
           
           # Install XercesC (modify the command to match the actual installer you have)
-          wine xercesc-installer.exe # If you're using Wine for Windows emulation
+          Start-Process -Wait -FilePath "xercesc-installer.exe" -ArgumentList "/S" # /S for silent installation
           
           # Add XercesC installation path to the system's PATH and include environment variables
           xercescPath="/path/to/XercesC"
