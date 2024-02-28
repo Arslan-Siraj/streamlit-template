@@ -10,6 +10,7 @@ import importlib.util
 import time
 from io import BytesIO
 import zipfile
+import os
 
 class StreamlitUI:
     """
@@ -374,6 +375,9 @@ class StreamlitUI:
         # write defaults ini files
         ini_file_path = Path(self.parameter_manager.ini_dir, f"{topp_tool_name}.ini")
         if not ini_file_path.exists():
+            if st.session_state.location == "local":
+                subprocess.call([os.getcwd(),'bin', topp_tool_name, "-write_ini", str(ini_file_path)])
+
             subprocess.call([topp_tool_name, "-write_ini", str(ini_file_path)])
         # read into Param object
         param = poms.Param()
