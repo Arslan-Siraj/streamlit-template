@@ -75,8 +75,9 @@ if st.button("Extract ids"):
             # Define the command to run as a subprocess (example: .exe so findstr)
             args = ["findstr", "idRef", mzML_file_path]
 
-        # Define the command to run as a subprocess (example: grep)
-        args = ["grep", "idRef", mzML_file_path]
+        else:
+            # Define the command to run as a subprocess (example: grep)
+            args = ["grep", "idRef", mzML_file_path]
 
 
         # Display the command that will be executed
